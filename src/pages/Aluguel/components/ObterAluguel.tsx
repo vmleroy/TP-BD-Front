@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import axios from 'axios';
 
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
 
 import CampoDeTextoLeitura from '../../../components/TextFields/CampoDeTextoLeitura';
 
-import ICliente from '../../../interface/ICliente';
+import IAluguel from '../../../interface/IAluguel';
 
-const ObterAluguel = ({ }) => {
+interface Props {
+    aluguelProps: IAluguel[];
+}
 
-    const [clientes, setClientes] = React.useState<ICliente[]>([]);
+const ObterAluguel: React.FC<Props> = ({ aluguelProps }) => {
+
     const [cpfCliente, setCpfCliente] = React.useState<string>('');
 
     const [idAluguel, setIdAluguel] = React.useState<string>('');
@@ -20,8 +25,8 @@ const ObterAluguel = ({ }) => {
         setCpfCliente(event.target.value as string);
     };
 
-    const handleClick = () => {
-        console.log(cpfVedendor, cpfCliente, placaCarro, valorBase);
+    const handleClick = (cpfCliente: string) => {
+        
     };
 
     return (
@@ -62,8 +67,8 @@ const ObterAluguel = ({ }) => {
                                 value={cpfCliente}
                                 onChange={handleSelectChange}
                             >
-                                {clientes?.map((item: ICliente) => {
-                                    return <MenuItem value={item.cpf}> Cpf:{item.cpf} - Nome:{item.nome} </MenuItem>
+                                {aluguelProps?.map((item: IAluguel) => {
+                                    return <MenuItem key={item.idaluguel} value={item.cpfcliente}> Cpf:{item.cpfcliente} </MenuItem>
                                 })}
                             </Select>
                         </FormControl>
@@ -72,8 +77,8 @@ const ObterAluguel = ({ }) => {
                         <CampoDeTextoLeitura label={'Placa do carro'} value={placaCarro} />
                         <CampoDeTextoLeitura label={'Valor base'} value={valorBase} />
                     </Grid>
-                    <Grid container direction='column' xs={2} >
-                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Pesquisar aluguel </Button>
+                    <Grid item container direction='column' xs={2} >
+                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={() => handleClick(cpfCliente)}> Pesquisar aluguel </Button>
                     </Grid>
                 </Grid>
             </Grid>

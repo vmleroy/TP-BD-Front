@@ -22,7 +22,6 @@ const CampoDeTextoLeitura: React.FC<Props> = ({
       >
         <TextField
           label={label}
-          defaultValue='-'
           value={value}
           variant="standard"
           InputProps={{

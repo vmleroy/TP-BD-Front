@@ -1,5 +1,7 @@
 import React from 'react';
 
+import axios from 'axios';
+
 import { Grid } from '@mui/material';
 
 import NavBar from '../../components/NavBar/NavBar';
@@ -7,7 +9,22 @@ import CadastroAluguel from './components/CadastroAluguel';
 import FinalizarAluguel from './components/FinalizarAluguel';
 import ObterAluguel from './components/ObterAluguel';
 
+import IAluguel from '../../interface/IAluguel';
+
 const Aluguel = ({ }) => {
+
+    React.useEffect(() => {
+        axios.get("http://localhost:5000/aluguel")
+            .then(resposta => {
+                setAlugueis(resposta.data);
+            })
+            .catch(erro => {
+                console.log(erro);
+            });
+    });
+
+    const [alugueis, setAlugueis] = React.useState<IAluguel[]>([]);
+
     return (
         <>
             <Grid
@@ -22,8 +39,8 @@ const Aluguel = ({ }) => {
             >
                 <NavBar turnButtonsOn={true} name={'Aluguel'} />
                 <CadastroAluguel />
-                <FinalizarAluguel />
-                <ObterAluguel />
+                <FinalizarAluguel aluguelProps={alugueis} />
+                <ObterAluguel aluguelProps={alugueis} />
             </Grid>
         </>
     );

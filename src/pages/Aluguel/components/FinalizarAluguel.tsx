@@ -4,10 +4,12 @@ import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEv
 
 import IAluguel from '../../../interface/IAluguel';
 
+interface Props {
+    aluguelProps: IAluguel[];
+}
 
-const FinalizarAluguel = ({ }) => {
+const FinalizarAluguel: React.FC<Props> = ({ aluguelProps }) => {
 
-    const [alugueis, setAlugueis] = React.useState<IAluguel[]>([]);
     const [idAluguel, setIdAluguel] = React.useState<string>('');
 
     const handleSelectChange = (event: SelectChangeEvent) => {
@@ -56,13 +58,13 @@ const FinalizarAluguel = ({ }) => {
                                 value={idAluguel}
                                 onChange={handleSelectChange}
                             >
-                                {alugueis?.map((item: IAluguel) => {
-                                    return <MenuItem value={item.idaluguel}> ID:{item.idaluguel} - Cliente:{item.cpfcliente} - Placa carro:{item.placacarro} </MenuItem>
+                                {aluguelProps?.map((item: IAluguel) => {
+                                    return <MenuItem key={item.idaluguel} value={item.idaluguel}> ID:{item.idaluguel} - Cliente:{item.cpfcliente} - Placa carro:{item.placacarro} </MenuItem>
                                 })}
                             </Select>
                         </FormControl>
                     </Grid>
-                    <Grid container direction='column' xs={2} >
+                    <Grid item container direction='column' xs={2} >
                         <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Finalizar aluguel </Button>
                     </Grid>
                 </Grid>

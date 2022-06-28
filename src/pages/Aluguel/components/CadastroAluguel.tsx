@@ -52,7 +52,7 @@ const CadastroAluguel = ({ }) => {
                         <CampoDeTexto label={'Placa do carro'} setValue={setPlacaCarro} />
                         <CampoDeTexto label={'Valor base'} setValue={setValorBase} />
                     </Grid>
-                    <Grid container direction='column' xs={2} >
+                    <Grid item container direction='column' xs={2} >
                         <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Completar cadastro </Button>
                     </Grid>
                 </Grid>

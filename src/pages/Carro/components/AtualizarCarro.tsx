@@ -48,7 +48,7 @@ const AtualizarCarro = ({ }) => {
                         <CampoDeTexto label={'ID Estabelecimento'} setValue={setIdEstabelecimento} />
                         <CampoDeTexto label={'Custo dia'} setValue={setCustoDia} />
                     </Grid>
-                    <Grid container direction='column' xs={2} >
+                    <Grid item container direction='column' xs={2} >
                         <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Atualizar cadastro </Button>
                     </Grid>
                 </Grid>
