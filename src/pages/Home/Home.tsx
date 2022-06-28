@@ -1,10 +1,21 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 
-import { Button, Grid, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 
 import NavBar from '../../components/NavBar/NavBar';
+import NavButtons from '../../components/Buttons/NavButtons';
 
 const Home = ({ }) => {
+
+    const navigate = useNavigate();
+
+    const handleClickAluguel = () => { navigate('/aluguel'); };
+    const handleClickCarros = () => { navigate('/carros'); };
+    const handleClickCliente = () => { navigate('/cliente'); };
+    const handleClickLoja = () => { navigate('/loja'); };
+    const handleClickVedendor = () => { navigate('/vedendor'); };
+
     return (
         <>
             <Grid
@@ -17,7 +28,7 @@ const Home = ({ }) => {
                     minHeight: '100vh'
                 }}
             >
-                <NavBar turnButtonsOn={false} />
+                <NavBar turnButtonsOn={false} name={'Home'} />
                 <Grid container item direction='column' alignItems='center'
                     sx={{
                         my: "2rem",
@@ -26,36 +37,11 @@ const Home = ({ }) => {
                     <Typography>
                         Telas disponíveis:
                     </Typography>
-                    <Button
-                        variant='outlined'
-                        sx={{ my: 2, width: "10vw", height: "4vh" }}
-                    >
-                        Aluguel
-                    </Button>
-                    <Button
-                        variant='outlined'
-                        sx={{ my: 2, width: "10vw", height: "4vh" }}
-                    >
-                        Carros
-                    </Button>
-                    <Button
-                        variant='outlined'
-                        sx={{ my: 2, width: "10vw", height: "4vh" }}
-                    >
-                        Cliente
-                    </Button>
-                    <Button
-                        variant='outlined'
-                        sx={{ my: 2, width: "10vw", height: "4vh" }}
-                    >
-                        Loja
-                    </Button>
-                    <Button
-                        variant='outlined'
-                        sx={{ my: 2, width: "10vw", height: "4vh" }}
-                    >
-                        Vedendor
-                    </Button>
+                    <NavButtons name={'Aluguel'} handleClick={handleClickAluguel} />
+                    <NavButtons name={'Carros'} handleClick={handleClickCarros} />
+                    <NavButtons name={'Cliente'} handleClick={handleClickCliente} />
+                    <NavButtons name={'Loja'} handleClick={handleClickLoja} />
+                    <NavButtons name={'Vedendor'} handleClick={handleClickVedendor} />
                 </Grid>
             </Grid>
         </>

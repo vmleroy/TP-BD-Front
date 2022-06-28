@@ -1,12 +1,25 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 
-import { AppBar, Button, CssBaseline, Grid, Toolbar, Typography } from '@mui/material';
+import { AppBar, CssBaseline, Grid, Toolbar, Typography } from '@mui/material';
+
+import BarButtons from '../../components/Buttons/BarButtons';
 
 interface Props {
-    turnButtonsOn: boolean
+    turnButtonsOn: boolean,
+    name: string
 }
 
-const NavBar: React.FC<Props> = ({ turnButtonsOn }) => {
+const NavBar: React.FC<Props> = ({ turnButtonsOn, name }) => {
+
+    const navigate = useNavigate();
+
+    const handleClickAluguel = () => { navigate('/aluguel'); };
+    const handleClickCarros = () => { navigate('/carros'); };
+    const handleClickCliente = () => { navigate('/cliente'); };
+    const handleClickLoja = () => { navigate('/loja'); };
+    const handleClickVedendor = () => { navigate('/vedendor'); };
+
     return (
         <>
             <CssBaseline />
@@ -16,47 +29,22 @@ const NavBar: React.FC<Props> = ({ turnButtonsOn }) => {
                         <Typography variant="h6"
                             component="div"
                             sx={{ flexGrow: 1, margin: 1, color: "white" }}>
-                            Locadora de carros
+                            Locadora de carros - {name}
                         </Typography>
                         {turnButtonsOn &&
-                            <Button
-                                variant='outlined'
-                                sx={{ mx: "0.5rem", backgroundColor: "white" }}
-                            >
-                                Aluguel
-                            </Button>
+                            <BarButtons name={'Aluguel'} handleClick={handleClickAluguel}/>
                         }
                         {turnButtonsOn &&
-                            <Button
-                                variant='outlined'
-                                sx={{ mx: "0.5rem", backgroundColor: "white" }}
-                            >
-                                Carros
-                            </Button>
+                            <BarButtons name={'Carros'} handleClick={handleClickCarros} />
                         }
                         {turnButtonsOn &&
-                            <Button
-                                variant='outlined'
-                                sx={{ mx: "0.5rem", backgroundColor: "white" }}
-                            >
-                                CLiente
-                            </Button>
+                            <BarButtons name={'Cliente'} handleClick={handleClickCliente} />
                         }
                         {turnButtonsOn &&
-                            <Button
-                                variant='outlined'
-                                sx={{ mx: "0.5rem", backgroundColor: "white" }}
-                            >
-                                Loja
-                            </Button>
+                            <BarButtons name={'Loja'} handleClick={handleClickLoja} />
                         }
                         {turnButtonsOn &&
-                            <Button
-                                variant='outlined'
-                                sx={{ mx: "0.5rem", backgroundColor: "white" }}
-                            >
-                                Vedendor
-                            </Button>
+                            <BarButtons name={'Vedendor'} handleClick={handleClickVedendor} />
                         }
                     </Toolbar>
                 </AppBar>
