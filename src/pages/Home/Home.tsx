@@ -11,7 +11,7 @@ const Home = ({ }) => {
     const navigate = useNavigate();
 
     const handleClickAluguel = () => { navigate('/aluguel'); };
-    const handleClickCarros = () => { navigate('/carros'); };
+    const handleClickCarros = () => { navigate('/carro'); };
     const handleClickCliente = () => { navigate('/cliente'); };
     const handleClickLoja = () => { navigate('/loja'); };
     const handleClickVedendor = () => { navigate('/vedendor'); };

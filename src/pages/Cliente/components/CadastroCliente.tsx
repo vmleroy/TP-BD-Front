@@ -4,17 +4,16 @@ import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEv
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
 
-import ICarro from '../../../interface/ICarro';
+const CadastroCliente = ({ }) => {
 
-const CadastroAluguel = ({ }) => {
-
-    const [cpfVedendor, setCpfVedendor] = React.useState<string>('');
+    const [nome, setNome] = React.useState<string>('');
     const [cpfCliente, setCpfCliente] = React.useState<string>('');
-    const [placaCarro, setPlacaCarro] = React.useState<string>('');
-    const [valorBase, setValorBase] = React.useState<string>('');
+    const [dataNascimento, setDataNascimento] = React.useState<string>('');
+    const [endereco, setEndereco] = React.useState<string>('');
+
 
     const handleClick = () => {
-        console.log(cpfVedendor, cpfCliente, placaCarro, valorBase);
+        console.log(nome, cpfCliente, Date.parse(dataNascimento), endereco);
     };
 
     return (
@@ -36,7 +35,7 @@ const CadastroAluguel = ({ }) => {
                             margin: "1rem"
                         }}
                     >
-                        Cadastro aluguel:
+                        Cadastro cliente:
                     </Typography>
                 </Grid>
                 <Grid
@@ -47,10 +46,10 @@ const CadastroAluguel = ({ }) => {
                     sx={{ minHeight: "20vh", border: 2, borderColor: "#120458" }}
                 >
                     <Grid item xs={10} >
-                        <CampoDeTexto label={'Cpf vedendor'} setValue={setCpfVedendor} />
+                        <CampoDeTexto label={'Nome'} setValue={setNome} />
                         <CampoDeTexto label={'Cpf cliente'} setValue={setCpfCliente} />
-                        <CampoDeTexto label={'Placa do carro'} setValue={setPlacaCarro} />
-                        <CampoDeTexto label={'Valor base'} setValue={setValorBase} />
+                        <CampoDeTexto label={'Data nascimento'} setValue={setDataNascimento} />
+                        <CampoDeTexto label={'Endereco'} setValue={setEndereco} />
                     </Grid>
                     <Grid container direction='column' xs={2} >
                         <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Completar cadastro </Button>
@@ -61,4 +60,4 @@ const CadastroAluguel = ({ }) => {
     );
 }
 
-export default CadastroAluguel;
+export default CadastroCliente;

@@ -2,20 +2,26 @@ import React from 'react';
 
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
 
-import IAluguel from '../../../interface/IAluguel';
+import CampoDeTextoLeitura from '../../../components/TextFields/CampoDeTextoLeitura';
 
+import ICliente from '../../../interface/ICliente';
 
-const FinalizarAluguel = ({ }) => {
+const ObterAluguel = ({ }) => {
 
-    const [alugueis, setAlugueis] = React.useState<IAluguel[]>([]);
+    const [clientes, setClientes] = React.useState<ICliente[]>([]);
+    const [cpfCliente, setCpfCliente] = React.useState<string>('');
+
     const [idAluguel, setIdAluguel] = React.useState<string>('');
+    const [cpfVedendor, setCpfVedendor] = React.useState<string>('');
+    const [placaCarro, setPlacaCarro] = React.useState<string>('');
+    const [valorBase, setValorBase] = React.useState<string>('');
 
     const handleSelectChange = (event: SelectChangeEvent) => {
-        setIdAluguel(event.target.value as string);
+        setCpfCliente(event.target.value as string);
     };
 
     const handleClick = () => {
-        console.log(idAluguel);
+        console.log(cpfVedendor, cpfCliente, placaCarro, valorBase);
     };
 
     return (
@@ -37,7 +43,7 @@ const FinalizarAluguel = ({ }) => {
                             margin: "1rem"
                         }}
                     >
-                        Finalizar aluguel:
+                        Pesquisar aluguel:
                     </Typography>
                 </Grid>
                 <Grid
@@ -49,21 +55,25 @@ const FinalizarAluguel = ({ }) => {
                 >
                     <Grid item xs={10} >
                         <FormControl fullWidth sx={{ margin: 2, maxWidth: "50vw" }}>
-                            <InputLabel id="select-aluguel">Aluguel</InputLabel>
+                            <InputLabel id="select-cpf-cliente">Clientes</InputLabel>
                             <Select
-                                id="select-aluguel"
-                                label="Aluguel"
-                                value={idAluguel}
+                                id="select-cpf-cliente"
+                                label="Clientes"
+                                value={cpfCliente}
                                 onChange={handleSelectChange}
                             >
-                                {alugueis?.map((item: IAluguel) => {
-                                    return <MenuItem value={item.idaluguel}> ID:{item.idaluguel} - Cliente:{item.cpfcliente} - Placa carro:{item.placacarro} </MenuItem>
+                                {clientes?.map((item: ICliente) => {
+                                    return <MenuItem value={item.cpf}> Cpf:{item.cpf} - Nome:{item.nome} </MenuItem>
                                 })}
                             </Select>
                         </FormControl>
+                        <CampoDeTextoLeitura label={'ID Aluguel'} value={idAluguel} />
+                        <CampoDeTextoLeitura label={'Cpf vedendor'} value={cpfVedendor} />
+                        <CampoDeTextoLeitura label={'Placa do carro'} value={placaCarro} />
+                        <CampoDeTextoLeitura label={'Valor base'} value={valorBase} />
                     </Grid>
                     <Grid container direction='column' xs={2} >
-                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Finalizar aluguel </Button>
+                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Pesquisar aluguel </Button>
                     </Grid>
                 </Grid>
             </Grid>
@@ -71,4 +81,4 @@ const FinalizarAluguel = ({ }) => {
     );
 }
 
-export default FinalizarAluguel;
+export default ObterAluguel;

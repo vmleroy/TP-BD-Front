@@ -3,11 +3,12 @@ import React from 'react';
 import { Grid } from '@mui/material';
 
 import NavBar from '../../components/NavBar/NavBar';
-import CadastroAluguel from './components/CadastroAluguel';
-import FinalizarAluguel from './components/FinalizarAluguel';
-import ObterAluguel from './components/ObterAluguel';
+import CadastroLoja from './components/CadastroLoja';
+import AtualizarLoja from './components/AtualizarLoja';
+import FinalizarLoja from './components/FinalizarLoja';
+import ObterLoja from './components/ObterLoja';
 
-const Aluguel = ({ }) => {
+const Loja = ({ }) => {
     return (
         <>
             <Grid
@@ -20,13 +21,14 @@ const Aluguel = ({ }) => {
                     minHeight: '100vh'
                 }}
             >
-                <NavBar turnButtonsOn={true} name={'Aluguel'} />
-                <CadastroAluguel />
-                <FinalizarAluguel />
-                <ObterAluguel />
+                <NavBar turnButtonsOn={true} name={'Loja'} />
+                <CadastroLoja />
+                <AtualizarLoja />
+                <FinalizarLoja />
+                <ObterLoja />
             </Grid>
         </>
     );
 }
 
-export default Aluguel;
+export default Loja;

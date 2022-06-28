@@ -1,20 +1,20 @@
 import React from 'react';
 
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
+import { Button, Grid, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
 
-import ICarro from '../../../interface/ICarro';
+const CadastroCarro = ({ }) => {
 
-const CadastroAluguel = ({ }) => {
+    const [idEstabelecimento, setIdEstabelecimento] = React.useState<string>('');
+    const [placa, setPlaca] = React.useState<string>('');
+    const [modeloCarro, setModeloCarro] = React.useState<string>('');
+    const [corCarro, setCorCarro] = React.useState<string>('');
+    const [custoDia, setCustoDia] = React.useState<string>('');
 
-    const [cpfVedendor, setCpfVedendor] = React.useState<string>('');
-    const [cpfCliente, setCpfCliente] = React.useState<string>('');
-    const [placaCarro, setPlacaCarro] = React.useState<string>('');
-    const [valorBase, setValorBase] = React.useState<string>('');
 
     const handleClick = () => {
-        console.log(cpfVedendor, cpfCliente, placaCarro, valorBase);
+        console.log(idEstabelecimento, placa, modeloCarro, corCarro, custoDia);
     };
 
     return (
@@ -36,7 +36,7 @@ const CadastroAluguel = ({ }) => {
                             margin: "1rem"
                         }}
                     >
-                        Cadastro aluguel:
+                        Cadastro carro:
                     </Typography>
                 </Grid>
                 <Grid
@@ -47,10 +47,11 @@ const CadastroAluguel = ({ }) => {
                     sx={{ minHeight: "20vh", border: 2, borderColor: "#120458" }}
                 >
                     <Grid item xs={10} >
-                        <CampoDeTexto label={'Cpf vedendor'} setValue={setCpfVedendor} />
-                        <CampoDeTexto label={'Cpf cliente'} setValue={setCpfCliente} />
-                        <CampoDeTexto label={'Placa do carro'} setValue={setPlacaCarro} />
-                        <CampoDeTexto label={'Valor base'} setValue={setValorBase} />
+                        <CampoDeTexto label={'ID Estabelecimento'} setValue={setIdEstabelecimento} />
+                        <CampoDeTexto label={'Placa'} setValue={setPlaca} />
+                        <CampoDeTexto label={'Modelo'} setValue={setModeloCarro} />
+                        <CampoDeTexto label={'Cor'} setValue={setCorCarro} />
+                        <CampoDeTexto label={'Custo dia'} setValue={setCustoDia} />
                     </Grid>
                     <Grid container direction='column' xs={2} >
                         <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Completar cadastro </Button>
@@ -61,4 +62,4 @@ const CadastroAluguel = ({ }) => {
     );
 }
 
-export default CadastroAluguel;
+export default CadastroCarro;
