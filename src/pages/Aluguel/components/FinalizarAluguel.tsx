@@ -1,5 +1,7 @@
 import React from 'react';
 
+import axios from 'axios';
+
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
 
 import IAluguel from '../../../interface/IAluguel';
@@ -14,10 +16,17 @@ const FinalizarAluguel: React.FC<Props> = ({ aluguelProps }) => {
 
     const handleSelectChange = (event: SelectChangeEvent) => {
         setIdAluguel(event.target.value as string);
+        
     };
 
-    const handleClick = () => {
-        console.log(idAluguel);
+    const handleClick = (idAluguel: string) => {
+        axios.put(`http://localhost:5000/api/alugueis/${idAluguel}/encerrar`)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
 
     return (
@@ -65,7 +74,7 @@ const FinalizarAluguel: React.FC<Props> = ({ aluguelProps }) => {
                         </FormControl>
                     </Grid>
                     <Grid item container direction='column' xs={2} >
-                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Finalizar aluguel </Button>
+                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={() => {handleClick(idAluguel)}}> Finalizar aluguel </Button>
                     </Grid>
                 </Grid>
             </Grid>

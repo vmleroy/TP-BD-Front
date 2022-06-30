@@ -15,13 +15,13 @@ const Aluguel = ({ }) => {
 
     React.useEffect(() => {
         axios.get("http://localhost:5000/aluguel")
-            .then(resposta => {
-                setAlugueis(resposta.data);
+            .then(res => {
+                setAlugueis(res.data);
             })
-            .catch(erro => {
-                console.log(erro);
+            .catch(err => {
+                console.log(err);
             });
-    });
+    }, []);
 
     const [alugueis, setAlugueis] = React.useState<IAluguel[]>([]);
 
@@ -40,7 +40,7 @@ const Aluguel = ({ }) => {
                 <NavBar turnButtonsOn={true} name={'Aluguel'} />
                 <CadastroAluguel />
                 <FinalizarAluguel aluguelProps={alugueis} />
-                <ObterAluguel aluguelProps={alugueis} />
+                <ObterAluguel />
             </Grid>
         </>
     );

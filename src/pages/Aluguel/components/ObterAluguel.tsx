@@ -8,25 +8,44 @@ import CampoDeTextoLeitura from '../../../components/TextFields/CampoDeTextoLeit
 
 import IAluguel from '../../../interface/IAluguel';
 
-interface Props {
-    aluguelProps: IAluguel[];
-}
 
-const ObterAluguel: React.FC<Props> = ({ aluguelProps }) => {
+const ObterAluguel = ({  }) => {
 
-    const [cpfCliente, setCpfCliente] = React.useState<string>('');
+    React.useEffect(() => {
+        axios.get("http://localhost:5000/aluguel")
+            .then(res => {
+                setAlugueis(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }, []);
+
+    const [alugueis, setAlugueis] = React.useState<IAluguel[]>([]);
 
     const [idAluguel, setIdAluguel] = React.useState<string>('');
     const [cpfVedendor, setCpfVedendor] = React.useState<string>('');
+    const [cpfCliente, setCpfCliente] = React.useState<string>('');
     const [placaCarro, setPlacaCarro] = React.useState<string>('');
     const [valorBase, setValorBase] = React.useState<string>('');
+    const [ativo, setAtivo] = React.useState<string>('');
 
     const handleSelectChange = (event: SelectChangeEvent) => {
-        setCpfCliente(event.target.value as string);
+        setIdAluguel(event.target.value as string);
     };
 
-    const handleClick = (cpfCliente: string) => {
-        
+    const handleClick = async (idAluguel: string) => {
+        await axios.get(`http://localhost:5000/aluguel/${idAluguel}`)
+        .then(res => {
+            setCpfCliente(res.data[0].cpfcliente);
+            setCpfVedendor(res.data[0].cpfvendedor);
+            setPlacaCarro(res.data[0].placacarro);
+            setValorBase(res.data[0].valorbase);
+            setAtivo(res.data[0].ativo);
+        })
+        .catch(err => {
+            console.log(err);
+        });
     };
 
     return (
@@ -60,25 +79,26 @@ const ObterAluguel: React.FC<Props> = ({ aluguelProps }) => {
                 >
                     <Grid item xs={10} >
                         <FormControl fullWidth sx={{ margin: 2, maxWidth: "50vw" }}>
-                            <InputLabel id="select-cpf-cliente">Clientes</InputLabel>
+                            <InputLabel id="select-alugueis">Alugueis</InputLabel>
                             <Select
-                                id="select-cpf-cliente"
-                                label="Clientes"
-                                value={cpfCliente}
+                                id="select-alugueis"
+                                label="Alugueis"
+                                value={idAluguel}
                                 onChange={handleSelectChange}
                             >
-                                {aluguelProps?.map((item: IAluguel) => {
-                                    return <MenuItem key={item.idaluguel} value={item.cpfcliente}> Cpf:{item.cpfcliente} </MenuItem>
+                                {alugueis?.map((item: IAluguel) => {
+                                    return <MenuItem key={item.idaluguel} value={item.idaluguel}> ID:{item.idaluguel} - Cliente:{item.cpfcliente} - Placa carro:{item.placacarro} </MenuItem>
                                 })}
                             </Select>
                         </FormControl>
-                        <CampoDeTextoLeitura label={'ID Aluguel'} value={idAluguel} />
+                        <CampoDeTextoLeitura label={'Cpf cliente'} value={cpfCliente} />
                         <CampoDeTextoLeitura label={'Cpf vedendor'} value={cpfVedendor} />
                         <CampoDeTextoLeitura label={'Placa do carro'} value={placaCarro} />
                         <CampoDeTextoLeitura label={'Valor base'} value={valorBase} />
+                        <CampoDeTextoLeitura label={'Ativo'} value={ativo} />
                     </Grid>
                     <Grid item container direction='column' xs={2} >
-                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={() => handleClick(cpfCliente)}> Pesquisar aluguel </Button>
+                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={() => handleClick(idAluguel)}> Pesquisar aluguel </Button>
                     </Grid>
                 </Grid>
             </Grid>

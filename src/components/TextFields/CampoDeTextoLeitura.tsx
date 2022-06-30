@@ -27,6 +27,9 @@ const CampoDeTextoLeitura: React.FC<Props> = ({
           InputProps={{
             readOnly: true,
           }}
+          InputLabelProps={{
+            shrink: true,
+          }}
           sx={{ width: '20rem' }}
         />
       </Box>
