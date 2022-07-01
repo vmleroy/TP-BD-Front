@@ -1,5 +1,7 @@
 import React from 'react';
 
+import axios from 'axios';
+
 import { Button, Grid, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
@@ -14,7 +16,14 @@ const CadastroCarro = ({ }) => {
 
 
     const handleClick = () => {
-        console.log(idEstabelecimento, placa, modeloCarro, corCarro, custoDia);
+        const newCarro = { placa: placa, idestabelecimento: idEstabelecimento, custodia: custoDia, modelo: modeloCarro, cor: corCarro };
+        axios.put("http://localhost:5000/carro/cadastro", newCarro)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
 
     return (

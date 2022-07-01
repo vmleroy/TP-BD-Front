@@ -1,5 +1,7 @@
 import React from 'react';
 
+import axios from 'axios';
+
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
@@ -11,7 +13,14 @@ const AtualizarCliente = ({ }) => {
     const [endereco, setEndereco] = React.useState<string>('');
 
     const handleClick = () => {
-        console.log(nome, cpfCliente, endereco);
+        const updtCliente = { cpfcliente: cpfCliente, nome: nome, endereco: endereco }
+        axios.put("http://localhost:5000/cliente/atualizar", updtCliente)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     };
 
     return (

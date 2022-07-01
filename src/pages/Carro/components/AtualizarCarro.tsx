@@ -1,5 +1,7 @@
 import React from 'react';
 
+import axios from 'axios';
+
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
@@ -11,7 +13,14 @@ const AtualizarCarro = ({ }) => {
     const [custoDia, setCustoDia] = React.useState<string>('');
 
     const handleClick = () => {
-        console.log(placa, idEstabelecimento, custoDia);
+        const updtCarro = { placa: placa, idestabelecimento: idEstabelecimento, custodia: custoDia };
+        axios.put("http://localhost:5000/carro/atualizar", updtCarro)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
 
     return (

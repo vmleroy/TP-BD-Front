@@ -1,5 +1,7 @@
 import React from 'react';
 
+import axios from 'axios';
+
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
@@ -8,13 +10,21 @@ import ICarro from '../../../interface/ICarro';
 
 const CadastroAluguel = ({ }) => {
 
-    const [cpfVedendor, setCpfVedendor] = React.useState<string>('');
+    const [cpfVendedor, setCpfVedendor] = React.useState<string>('');
     const [cpfCliente, setCpfCliente] = React.useState<string>('');
     const [placaCarro, setPlacaCarro] = React.useState<string>('');
     const [valorBase, setValorBase] = React.useState<string>('');
 
     const handleClick = () => {
-        console.log(cpfVedendor, cpfCliente, placaCarro, valorBase);
+        const newCadastro={cpfvendedor: parseFloat(cpfVendedor), cpfcliente: parseFloat(cpfCliente), 
+            placacarro: placaCarro, valorbase: parseFloat(valorBase)}
+        axios.post("http://localhost:5000/api/alugueis/novo", newCadastro)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
 
     return (

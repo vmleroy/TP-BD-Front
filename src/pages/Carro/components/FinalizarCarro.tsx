@@ -1,5 +1,7 @@
 import React from 'react';
 
+import axios from 'axios';
+
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
@@ -10,7 +12,14 @@ const FinalizarCarro = ({ }) => {
     const [placaCarro, setPlacaCarro] = React.useState<string>('');
 
     const handleClick = () => {
-        console.log(placaCarro);
+        const remvCarro = { placa: placaCarro };
+        axios.delete("http://localhost:5000/carro/remover")
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
 
     return (

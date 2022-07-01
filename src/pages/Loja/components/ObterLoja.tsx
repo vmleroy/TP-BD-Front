@@ -6,7 +6,7 @@ import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
 import CampoDeTextoLeitura from '../../../components/TextFields/CampoDeTextoLeitura';
 
 import ICarro from '../../../interface/ICarro';
-import IVedendor from '../../../interface/IVedendor';
+import IVendedor from '../../../interface/IVendedor';
 
 const ObterLoja = ({ }) => {
 
@@ -15,7 +15,7 @@ const ObterLoja = ({ }) => {
     const [endereco, setEndereco] = React.useState<string>('');
 
     const [carros, setCarros] = React.useState<ICarro[]>([]);
-    const [vedendores, setVedendores] = React.useState<IVedendor[]>([]);
+    const [vendedores, setVendedores] = React.useState<IVendedor[]>([]);
 
     const handleClick = () => {
         console.log(idLoja, endereco);
@@ -66,13 +66,13 @@ const ObterLoja = ({ }) => {
                             </Select>
                         </FormControl>
                         <FormControl fullWidth sx={{ margin: 2, maxWidth: "50vw" }}>
-                            <InputLabel id="select-carros">Vedendores</InputLabel>
+                            <InputLabel id="select-carros">Vendedores</InputLabel>
                             <Select
                                 id="select-carros"
                                 label="Clientes"
-                                value={vedendores}
+                                value={vendedores}
                             >
-                                {vedendores?.map((item: IVedendor) => {
+                                {vendedores?.map((item: IVendedor) => {
                                     return <MenuItem value={item.cpf}> CPF:{item.cpf} - Nome:{item.nome} </MenuItem>
                                 })}
                             </Select>

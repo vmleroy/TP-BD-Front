@@ -6,7 +6,7 @@ import Aluguel from "./pages/Aluguel/Aluguel";
 import Cliente from "./pages/Cliente/Cliente";
 import Carro from "./pages/Carro/Carro";
 import Loja from "./pages/Loja/Loja";
-import Vedendor from "./pages/Vedendor/Vedendor";
+import Vendedor from "./pages/Vendedor/Vendedor";
 
 const App = () => {
   return (
@@ -17,7 +17,7 @@ const App = () => {
         <Route path="/carro" element={<Carro />} />
         <Route path="/cliente" element={<Cliente />} />
         <Route path="/loja" element={<Loja />} />
-        <Route path="/vedendor" element={<Vedendor />} />
+        <Route path="/vedendor" element={<Vendedor />} />
       </Routes>
     </Router>
   );

@@ -1,4 +1,4 @@
-export default interface IVedendor {
+export default interface IVendedor {
     idestabelecimento: number,
     cpf: number,
     nome: string,

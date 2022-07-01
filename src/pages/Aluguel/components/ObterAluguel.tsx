@@ -24,7 +24,7 @@ const ObterAluguel = ({  }) => {
     const [alugueis, setAlugueis] = React.useState<IAluguel[]>([]);
 
     const [idAluguel, setIdAluguel] = React.useState<string>('');
-    const [cpfVedendor, setCpfVedendor] = React.useState<string>('');
+    const [cpfVendedor, setCpfVendedor] = React.useState<string>('');
     const [cpfCliente, setCpfCliente] = React.useState<string>('');
     const [placaCarro, setPlacaCarro] = React.useState<string>('');
     const [valorBase, setValorBase] = React.useState<string>('');
@@ -38,7 +38,7 @@ const ObterAluguel = ({  }) => {
         await axios.get(`http://localhost:5000/aluguel/${idAluguel}`)
         .then(res => {
             setCpfCliente(res.data[0].cpfcliente);
-            setCpfVedendor(res.data[0].cpfvendedor);
+            setCpfVendedor(res.data[0].cpfvendedor);
             setPlacaCarro(res.data[0].placacarro);
             setValorBase(res.data[0].valorbase);
             setAtivo(res.data[0].ativo);
@@ -79,7 +79,7 @@ const ObterAluguel = ({  }) => {
                 >
                     <Grid item xs={10} >
                         <FormControl fullWidth sx={{ margin: 2, maxWidth: "50vw" }}>
-                            <InputLabel id="select-alugueis">Alugueis</InputLabel>
+                            <InputLabel id="select-alugueis">Aluguel</InputLabel>
                             <Select
                                 id="select-alugueis"
                                 label="Alugueis"
@@ -92,7 +92,7 @@ const ObterAluguel = ({  }) => {
                             </Select>
                         </FormControl>
                         <CampoDeTextoLeitura label={'Cpf cliente'} value={cpfCliente} />
-                        <CampoDeTextoLeitura label={'Cpf vedendor'} value={cpfVedendor} />
+                        <CampoDeTextoLeitura label={'Cpf Vendedor'} value={cpfVendedor} />
                         <CampoDeTextoLeitura label={'Placa do carro'} value={placaCarro} />
                         <CampoDeTextoLeitura label={'Valor base'} value={valorBase} />
                         <CampoDeTextoLeitura label={'Ativo'} value={ativo} />

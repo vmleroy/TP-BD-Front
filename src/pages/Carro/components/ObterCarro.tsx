@@ -1,5 +1,7 @@
 import React from 'react';
 
+import axios from 'axios';
+
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
@@ -25,8 +27,17 @@ const ObterCarro: React.FC<Props> = ({ carrosProps }) => {
         setPlaca(event.target.value as string);
     };
 
-    const handleClick = () => {
-        console.log(placa);
+    const handleClick = (placa: string) => {
+        axios.get(`http://localhost:5000/carro/consultar/${placa}`)
+            .then(res => {
+                setIdEstabelecimento(res.data[0].idestabelecimento);
+                setModeloCarro(res.data[0].modelo);
+                setCorCarro(res.data[0].cor);
+                setCustoDia(res.data[0].custodia);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
 
     return (
@@ -79,7 +90,7 @@ const ObterCarro: React.FC<Props> = ({ carrosProps }) => {
                         <CampoDeTextoLeitura label={'Alugado?'} value={alugado} />
                     </Grid>
                     <Grid item container direction='column' xs={2} >
-                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Pesquisar aluguel </Button>
+                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={() => (handleClick(placa))}> Pesquisar aluguel </Button>
                     </Grid>
                 </Grid>
             </Grid>

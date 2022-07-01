@@ -1,5 +1,7 @@
 import React from 'react';
 
+import axios from 'axios';
+
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
@@ -13,7 +15,15 @@ const CadastroCliente = ({ }) => {
 
 
     const handleClick = () => {
-        console.log(nome, cpfCliente, Date.parse(dataNascimento), endereco);
+        const newCliente = { cpfcliente: cpfCliente, nome: nome, 
+            endereco: endereco, datanascimento: dataNascimento }
+        axios.post("http://localhost:5000/cliente/cadastro", newCliente)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     };
 
     return (
