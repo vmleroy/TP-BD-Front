@@ -29,6 +29,38 @@ const ObterAluguel = ({ }) => {
             .catch(err => {
                 console.log(err)
             })
+        const getClienteCpf = { cpf: cpfCliente }
+        axios.put("http://localhost:5000/api/cliente/consultar/aluguel", getClienteCpf)
+            .then(res => {
+                setJaAlugou(res.data[0].jaAlugou);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        axios.put("http://localhost:5000/api/cliente/consultar/aluguel/contagem")
+            .then(res => {
+                res.data.forEach((element: { cpf: string; numAlugueis: React.SetStateAction<string>; }) => {
+                    if(element.cpf === cpfCliente) {
+                        setNumAlugueis(element.numAlugueis);
+                    } 
+                });
+            })
+            .catch(err => {
+                console.log(err)
+            })
+            axios.put("http://localhost:5000/api/cliente/consultar/aluguel/historico")
+            .then(res => {
+                res.data.forEach((element: { cpf: string; numAlugueis: React.SetStateAction<string>; }) => {
+                    if(element.cpf === cpfCliente) {
+                        setAlugueisFinalizados(element.numAlugueis);
+                        return;
+                    }                     
+                });
+                setAlugueisFinalizados('0');
+            })
+            .catch(err => {
+                console.log(err)
+            })
     };
 
     return (
@@ -66,10 +98,10 @@ const ObterAluguel = ({ }) => {
                         <CampoDeTextoLeitura label={'Data nascimento'} value={dataNascimento} />
                         <CampoDeTextoLeitura label={'Endereco'} value={endereco} />
                         <CampoDeTextoLeitura label={'Ja fez alugueis na loja'} value={String(jaAlugou)} />
-                        {jaAlugou && 
+                        {jaAlugou &&
                             <CampoDeTextoLeitura label={'Numero alugueis realizados'} value={numAlugueis} />
                         }
-                        {jaAlugou && 
+                        {jaAlugou &&
                             <CampoDeTextoLeitura label={'Alugueis finalizados'} value={alugueisFinalizados} />
                         }
                     </Grid>

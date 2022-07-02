@@ -2,10 +2,12 @@ import React from 'react';
 
 import axios from 'axios';
 
-import { Button, Grid, SelectChangeEvent, Typography } from '@mui/material'
+import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
 import CampoDeTextoLeitura from '../../../components/TextFields/CampoDeTextoLeitura';
+
+import IAlugueisRealizadosCarro from '../../../interface/IAlugueisRealizadosCarro';
 
 const ObterCarro = ({ }) => {
 
@@ -16,6 +18,8 @@ const ObterCarro = ({ }) => {
     const [corCarro, setCorCarro] = React.useState<string>('');
     const [custoDia, setCustoDia] = React.useState<string>('');
     const [alugado, setAlugado] = React.useState<string>('');
+
+    const [clientesAlugaram, setClientesAlugaram] = React.useState<IAlugueisRealizadosCarro[]>([]);
 
     const handleSelectChange = (event: SelectChangeEvent) => {
         setPlaca(event.target.value as string);
@@ -29,6 +33,14 @@ const ObterCarro = ({ }) => {
                 setModeloCarro(res.data[0].modelo);
                 setCorCarro(res.data[0].cor);
                 setCustoDia(res.data[0].custodia);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        const getClientesAlugaramCarro = { placacarro: placa }
+        axios.put(`http://localhost:5000/api/carro/consultar/aluguel/historico`, getClientesAlugaramCarro)
+            .then(res => {
+                setClientesAlugaram(res.data);
             })
             .catch(err => {
                 console.log(err);
@@ -70,7 +82,19 @@ const ObterCarro = ({ }) => {
                         <CampoDeTextoLeitura label={'Modelo'} value={modeloCarro} />
                         <CampoDeTextoLeitura label={'Cor'} value={corCarro} />
                         <CampoDeTextoLeitura label={'Custo dia'} value={custoDia} />
-                        <CampoDeTextoLeitura label={'Alugado?'} value={alugado} />
+                        {/* <CampoDeTextoLeitura label={'Alugado?'} value={alugado} /> */}
+                        <FormControl fullWidth sx={{ margin: 2, maxWidth: "50vw" }}>
+                            <InputLabel id="select-clientes-que-alugaram">Clientes que alugaram</InputLabel>
+                            <Select
+                                id="select-clientes-que-alugaram"
+                                label="Clientes que alugaram"
+                                value={clientesAlugaram}
+                            >
+                                {clientesAlugaram?.map((item: IAlugueisRealizadosCarro) => {
+                                    return <MenuItem value={item.cpf}> CPF:{item.cpf} - Vezes alugadas:{item.numAlugueis} </MenuItem>
+                                })}
+                            </Select>
+                        </FormControl>
                     </Grid>
                     <Grid item container direction='column' xs={2} >
                         <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={() => (handleClick(placa))}> Pesquisar aluguel </Button>

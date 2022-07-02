@@ -16,7 +16,6 @@ const ObterLoja = ({ }) => {
 
     const [endereco, setEndereco] = React.useState<string>('');
 
-    const [carros, setCarros] = React.useState<ICarro[]>([]);
     const [vendedores, setVendedores] = React.useState<IVendedor[]>([]);
 
     const handleClick = () => {
@@ -24,6 +23,13 @@ const ObterLoja = ({ }) => {
         axios.put('http://localhost:5000/estabelecimento/consultar', getLoja)
             .then(res => {
                 setEndereco(res.data[0].endereco);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        axios.put('http://localhost:5000/api/estabelecimento/consultar/vendedor', getLoja)
+            .then(res => {
+                setVendedores(res.data);
             })
             .catch(err => {
                 console.log(err);
@@ -62,18 +68,6 @@ const ObterLoja = ({ }) => {
                     <Grid item xs={10} >
                         <CampoDeTexto label={'ID Loja'} setValue={setIdLoja} />
                         <CampoDeTextoLeitura label={'Endereco'} value={endereco} />
-                        <FormControl fullWidth sx={{ margin: 2, maxWidth: "50vw" }}>
-                            <InputLabel id="select-carros">Carros</InputLabel>
-                            <Select
-                                id="select-carros"
-                                label="Carros"
-                                value={carros}
-                            >
-                                {carros?.map((item: ICarro) => {
-                                    return <MenuItem value={item.placa}> Placa:{item.placa} - Modelo:{item.modelo} </MenuItem>
-                                })}
-                            </Select>
-                        </FormControl>
                         <FormControl fullWidth sx={{ margin: 2, maxWidth: "50vw" }}>
                             <InputLabel id="select-carros">Vendedores</InputLabel>
                             <Select
