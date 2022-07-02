@@ -1,19 +1,28 @@
 import React from 'react';
 
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
+import axios from 'axios';
+
+import { Button, Grid, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
 
 const CadastroVedendor = ({ }) => {
 
     const [idLoja, setIdLoja] = React.useState<string>('');
-    const [cpfVedendor, setCpfVedendor] = React.useState<string>('');
+    const [cpfVedendor, setCpfVendedor] = React.useState<string>('');
     const [nome, setNome] = React.useState<string>('');
     const [salario, setSalario] = React.useState<string>('');
 
 
     const handleClick = () => {
-        console.log(idLoja, nome, cpfVedendor, salario);
+        const newVendedor = {idestabelecimento: idLoja, nome: nome, cpf: cpfVedendor, salariobase: salario}
+        axios.post('http://localhost:5000/vendedor/cadastro', newVendedor)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
 
     return (
@@ -47,7 +56,7 @@ const CadastroVedendor = ({ }) => {
                 >
                     <Grid item xs={10} >
                         <CampoDeTexto label={'ID Loja'} setValue={setIdLoja} />
-                        <CampoDeTexto label={'Cpf'} setValue={setCpfVedendor} />
+                        <CampoDeTexto label={'Cpf'} setValue={setCpfVendedor} />
                         <CampoDeTexto label={'Nome'} setValue={setNome} />
                         <CampoDeTexto label={'Salario'} setValue={setSalario} />
                     </Grid>

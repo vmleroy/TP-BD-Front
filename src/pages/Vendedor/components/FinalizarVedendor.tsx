@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
+import axios from 'axios';
+
+import { Button, Grid, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
 
@@ -10,7 +12,14 @@ const FinalizarVedendor = ({ }) => {
     const [cpfVedendor, setCpfVedendor] = React.useState<string>('');
 
     const handleClick = () => {
-        console.log(cpfVedendor);
+        const remvVendedor = {cpf: cpfVedendor}
+        axios.post('http://localhost:5000/vendedor/remover', remvVendedor)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
 
     return (

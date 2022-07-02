@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
+import axios from 'axios';
+
+import { Button, Grid, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
 import CampoDeTextoLeitura from '../../../components/TextFields/CampoDeTextoLeitura';
-
-import IAluguel from '../../../interface/IAluguel';
 
 const ObterAluguel = ({ }) => {
 
@@ -14,11 +14,21 @@ const ObterAluguel = ({ }) => {
     const [nome, setNome] = React.useState<string>('');
     const [dataNascimento, setDataNascimento] = React.useState<string>('');
     const [endereco, setEndereco] = React.useState<string>('');
+    const [jaAlugou, setJaAlugou] = React.useState<boolean>(false);
     const [numAlugueis, setNumAlugueis] = React.useState<string>('');
-    const [aluguelAtivo, setAluguelAtivo] = React.useState<string>('');
+    const [alugueisFinalizados, setAlugueisFinalizados] = React.useState<string>('');
 
-    const handleClick = () => {
-        console.log(cpfCliente);
+    const handleClick = (cpfCliente: string) => {
+        const getCliente = { cpfcliente: cpfCliente }
+        axios.put("http://localhost:5000/cliente/consultar", getCliente)
+            .then(res => {
+                setNome(res.data[0].nome);
+                setDataNascimento(res.data[0].datanascimento);
+                setEndereco(res.data[0].endereco);
+            })
+            .catch(err => {
+                console.log(err)
+            })
     };
 
     return (
@@ -55,11 +65,16 @@ const ObterAluguel = ({ }) => {
                         <CampoDeTextoLeitura label={'Nome'} value={nome} />
                         <CampoDeTextoLeitura label={'Data nascimento'} value={dataNascimento} />
                         <CampoDeTextoLeitura label={'Endereco'} value={endereco} />
-                        <CampoDeTextoLeitura label={'Numero alugueis realizados'} value={numAlugueis} />
-                        <CampoDeTextoLeitura label={'Aluguel ativo'} value={aluguelAtivo} />
+                        <CampoDeTextoLeitura label={'Ja fez alugueis na loja'} value={String(jaAlugou)} />
+                        {jaAlugou && 
+                            <CampoDeTextoLeitura label={'Numero alugueis realizados'} value={numAlugueis} />
+                        }
+                        {jaAlugou && 
+                            <CampoDeTextoLeitura label={'Alugueis finalizados'} value={alugueisFinalizados} />
+                        }
                     </Grid>
                     <Grid container direction='column' xs={2} >
-                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Pesquisar aluguel </Button>
+                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={() => (handleClick(cpfCliente))}> Pesquisar aluguel </Button>
                     </Grid>
                 </Grid>
             </Grid>

@@ -17,7 +17,7 @@ const CadastroCarro = ({ }) => {
 
     const handleClick = () => {
         const newCarro = { placa: placa, idestabelecimento: idEstabelecimento, custodia: custoDia, modelo: modeloCarro, cor: corCarro };
-        axios.put("http://localhost:5000/carro/cadastro", newCarro)
+        axios.post("http://localhost:5000/carro/cadastro", newCarro)
             .then(res => {
                 console.log(res.data);
             })

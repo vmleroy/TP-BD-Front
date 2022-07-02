@@ -2,7 +2,7 @@ import React from 'react';
 
 import axios from 'axios';
 
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
+import { Button, Grid, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
 
@@ -13,7 +13,7 @@ const FinalizarCarro = ({ }) => {
 
     const handleClick = () => {
         const remvCarro = { placa: placaCarro };
-        axios.delete("http://localhost:5000/carro/remover")
+        axios.put("http://localhost:5000/carro/remover", remvCarro)
             .then(res => {
                 console.log(res.data);
             })

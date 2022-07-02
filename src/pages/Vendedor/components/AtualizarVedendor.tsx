@@ -1,16 +1,25 @@
 import React from 'react';
 
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
+import axios from 'axios';
+
+import { Button, Grid, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
 
 const AtualizarVedendor = ({ }) => {
 
-    const [cpfVedendor, setCpfVedendor] = React.useState<string>('');
+    const [cpfVendedor, setCpfVendedor] = React.useState<string>('');
     const [salario, setSalario] = React.useState<string>('');
 
     const handleClick = () => {
-        console.log(cpfVedendor, salario);
+        const updtVendedor = { cpf: cpfVendedor, salariobase: salario };
+        axios.put('http://localhost:5000/vendedor/atualizar', updtVendedor)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
 
     return (
@@ -43,7 +52,7 @@ const AtualizarVedendor = ({ }) => {
                     sx={{ minHeight: "20vh", border: 2, borderColor: "#120458" }}
                 >
                     <Grid item xs={10} >
-                        <CampoDeTexto label={'Cpf'} setValue={setCpfVedendor} />
+                        <CampoDeTexto label={'Cpf'} setValue={setCpfVendedor} />
                         <CampoDeTexto label={'Salario'} setValue={setSalario} />
                     </Grid>
                     <Grid container direction='column' xs={2} >

@@ -11,22 +11,7 @@ import AtualizarCarro from './components/AtualizarCarro';
 import FinalizarCarro from './components/FinalizarCarro';
 import ObterCarro from './components/ObterCarro';
 
-import ICarro from '../../interface/ICarro';
-
 const Carro = ({ }) => {
-
-    React.useEffect(() => {
-        axios.get("http://localhost:5000/carro/consultar")
-            .then(resposta => {
-                console.log(resposta.data);
-                setCarros(resposta.data);
-            })
-            .catch(erro => {
-                console.log(erro);
-            });
-    });
-
-    const [ carros, setCarros ] = useState<ICarro[]>([]);
 
     return (
         <>
@@ -44,7 +29,7 @@ const Carro = ({ }) => {
                 <CadastroCarro />
                 <AtualizarCarro />
                 <FinalizarCarro />
-                <ObterCarro carrosProps={carros} />
+                <ObterCarro />
             </Grid>
         </>
     );

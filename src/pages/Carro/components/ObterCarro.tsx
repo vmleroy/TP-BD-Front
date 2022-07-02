@@ -2,18 +2,12 @@ import React from 'react';
 
 import axios from 'axios';
 
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
+import { Button, Grid, SelectChangeEvent, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
 import CampoDeTextoLeitura from '../../../components/TextFields/CampoDeTextoLeitura';
 
-import ICarro from '../../../interface/ICarro';
-
-interface Props {
-    carrosProps: ICarro[];
-}
-
-const ObterCarro: React.FC<Props> = ({ carrosProps }) => {
+const ObterCarro = ({ }) => {
 
     const [placa, setPlaca] = React.useState<string>('');
 
@@ -28,7 +22,8 @@ const ObterCarro: React.FC<Props> = ({ carrosProps }) => {
     };
 
     const handleClick = (placa: string) => {
-        axios.get(`http://localhost:5000/carro/consultar/${placa}`)
+        const getPlaca = { placa: placa };
+        axios.put(`http://localhost:5000/carro/consultar`, getPlaca)
             .then(res => {
                 setIdEstabelecimento(res.data[0].idestabelecimento);
                 setModeloCarro(res.data[0].modelo);
@@ -70,19 +65,7 @@ const ObterCarro: React.FC<Props> = ({ carrosProps }) => {
                     sx={{ minHeight: "20vh", border: 2, borderColor: "#120458" }}
                 >
                     <Grid item xs={10} >
-                        <FormControl fullWidth sx={{ margin: 2, maxWidth: "50vw" }}>
-                            <InputLabel id="select-carro">Carros</InputLabel>
-                            <Select
-                                id="select-carro"
-                                label="Clientes"
-                                value={placa}
-                                onChange={handleSelectChange}
-                            >
-                                {carrosProps?.map((item: ICarro) => {
-                                    return <MenuItem key={item.placa} value={item.placa}> Placa:{item.placa} - Modelo:{item.modelo} - Cor:{item.cor} - Loja:{item.idestabelecimento} </MenuItem>
-                                })}
-                            </Select>
-                        </FormControl>
+                        <CampoDeTexto label={'Placa do carro'} setValue={setPlaca} />
                         <CampoDeTextoLeitura label={'ID Estabelecimento'} value={idEstabelecimento} />
                         <CampoDeTextoLeitura label={'Modelo'} value={modeloCarro} />
                         <CampoDeTextoLeitura label={'Cor'} value={corCarro} />

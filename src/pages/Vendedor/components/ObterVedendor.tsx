@@ -1,24 +1,36 @@
 import React from 'react';
 
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
+import axios from 'axios';
+
+import { Button, Grid, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
 import CampoDeTextoLeitura from '../../../components/TextFields/CampoDeTextoLeitura';
 
-import IAluguel from '../../../interface/IAluguel';
-
 const ObterVedendor = ({ }) => {
 
-    const [cpfVedendor, setCpfVedendor] = React.useState<string>('');
+    const [cpfVendedor, setCpfVedendor] = React.useState<string>('');
 
     const [nome, setNome] = React.useState<string>('');
     const [idLoja, setIdLoja] = React.useState<string>('');
     const [salario, setSalario] = React.useState<string>('');
-    const [incSalario, setIncSalario] = React.useState<string>('');
     const [numVendas, setNumVendas] = React.useState<string>('');
+    const [bonusMensal, setBonusMensal] = React.useState<string>('');
 
     const handleClick = () => {
-        console.log(cpfVedendor);
+        console.log(cpfVendedor);
+        const getVendedor = { cpf: parseFloat(cpfVendedor) }
+        axios.put('http://localhost:5000/vendedor/consultar', getVendedor)
+            .then(res => {
+                setNome(res.data[0].nome);
+                setIdLoja(res.data[0].idestabelecimento);
+                setSalario(res.data[0].salariobase);
+                setNumVendas(res.data[0].numvendas);
+                setBonusMensal(res.data[0].bonusmensal)
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
 
     return (
@@ -55,11 +67,11 @@ const ObterVedendor = ({ }) => {
                         <CampoDeTextoLeitura label={'Nome'} value={nome} />
                         <CampoDeTextoLeitura label={'ID Loja'} value={idLoja} />
                         <CampoDeTextoLeitura label={'Salario'} value={salario} />
-                        <CampoDeTextoLeitura label={'Incremento salarial'} value={incSalario} />
                         <CampoDeTextoLeitura label={'Numero de vendas'} value={numVendas} />
+                        <CampoDeTextoLeitura label={'Bonus mensal'} value={bonusMensal} />
                     </Grid>
                     <Grid container direction='column' xs={2} >
-                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Pesquisar aluguel </Button>
+                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Pesquisar vendedor </Button>
                     </Grid>
                 </Grid>
             </Grid>

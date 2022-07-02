@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
+import axios from 'axios';
+
+import { Button, Grid, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
 
@@ -10,7 +12,14 @@ const FinalizarLoja = ({ }) => {
     const [idLoja, setIdLoja] = React.useState<string>('');
 
     const handleClick = () => {
-        console.log(idLoja);
+        const remvLoja = { idestabelecimento: idLoja };
+        axios.put(`http://localhost:5000/estabelecimento/remover`, remvLoja)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
 
     return (

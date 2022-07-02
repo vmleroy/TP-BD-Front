@@ -7,6 +7,7 @@ import CadastroVedendor from './components/CadastroVedendor';
 import AtualizarVedendor from './components/AtualizarVedendor';
 import FinalizarVedendor from './components/FinalizarVedendor';
 import ObterVedendor from './components/ObterVedendor';
+import GerarFolhaPagamento from './components/GerarFolhaPagamento';
 
 const Vedendor = ({ }) => {
     return (
@@ -26,6 +27,7 @@ const Vedendor = ({ }) => {
                 <AtualizarVedendor />
                 <FinalizarVedendor />
                 <ObterVedendor />
+                <GerarFolhaPagamento />
             </Grid>
         </>
     );

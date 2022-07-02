@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
+import axios from 'axios';
+
+import { Button, Grid, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
 
@@ -9,8 +11,15 @@ const FinalizarCliente = ({ }) => {
 
     const [cpfCliente, setCpfCliente] = React.useState<string>('');
 
-    const handleClick = () => {
-        console.log(cpfCliente);
+    const handleClick = (cpfCliente: string) => {
+        const endCliente = { cpfcliente: cpfCliente }
+        axios.put("http://localhost:5000/cliente/remover", endCliente)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     };
 
     return (
@@ -46,7 +55,7 @@ const FinalizarCliente = ({ }) => {
                         <CampoDeTexto label={'Cpf cliente'} setValue={setCpfCliente} />
                     </Grid>
                     <Grid container direction='column' xs={2} >
-                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Finalizar aluguel </Button>
+                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={() => (handleClick(cpfCliente))}> Finalizar aluguel </Button>
                     </Grid>
                 </Grid>
             </Grid>

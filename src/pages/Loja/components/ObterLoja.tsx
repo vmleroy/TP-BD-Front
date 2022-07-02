@@ -1,5 +1,7 @@
 import React from 'react';
 
+import axios from 'axios';
+
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
 
 import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
@@ -18,7 +20,14 @@ const ObterLoja = ({ }) => {
     const [vendedores, setVendedores] = React.useState<IVendedor[]>([]);
 
     const handleClick = () => {
-        console.log(idLoja, endereco);
+        const getLoja = { idestabelecimento: idLoja };
+        axios.put('http://localhost:5000/estabelecimento/consultar', getLoja)
+            .then(res => {
+                setEndereco(res.data[0].endereco);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
 
     return (
@@ -51,13 +60,13 @@ const ObterLoja = ({ }) => {
                     sx={{ minHeight: "20vh", border: 2, borderColor: "#120458" }}
                 >
                     <Grid item xs={10} >
-                        <CampoDeTexto label={'ID Loja'} setValue={setIdLoja} />                    
+                        <CampoDeTexto label={'ID Loja'} setValue={setIdLoja} />
                         <CampoDeTextoLeitura label={'Endereco'} value={endereco} />
                         <FormControl fullWidth sx={{ margin: 2, maxWidth: "50vw" }}>
                             <InputLabel id="select-carros">Carros</InputLabel>
                             <Select
                                 id="select-carros"
-                                label="Clientes"
+                                label="Carros"
                                 value={carros}
                             >
                                 {carros?.map((item: ICarro) => {
@@ -68,8 +77,8 @@ const ObterLoja = ({ }) => {
                         <FormControl fullWidth sx={{ margin: 2, maxWidth: "50vw" }}>
                             <InputLabel id="select-carros">Vendedores</InputLabel>
                             <Select
-                                id="select-carros"
-                                label="Clientes"
+                                id="select-vendedores"
+                                label="Vendedores"
                                 value={vendedores}
                             >
                                 {vendedores?.map((item: IVendedor) => {
