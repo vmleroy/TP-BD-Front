@@ -12,32 +12,33 @@ const ObterAluguel = ({ }) => {
     const [cpfCliente, setCpfCliente] = React.useState<string>('');
 
     const [nome, setNome] = React.useState<string>('');
-    const [dataNascimento, setDataNascimento] = React.useState<string>('');
+    const [idade, setIdade] = React.useState<string>('');
     const [endereco, setEndereco] = React.useState<string>('');
     const [jaAlugou, setJaAlugou] = React.useState<boolean>(false);
     const [numAlugueis, setNumAlugueis] = React.useState<string>('');
     const [alugueisFinalizados, setAlugueisFinalizados] = React.useState<string>('');
 
-    const handleClick = (cpfCliente: string) => {
-        const getCliente = { cpfcliente: cpfCliente }
-        axios.put("http://localhost:5000/cliente/consultar", getCliente)
+    const handleClick = async (cpfCliente: string) => {
+        const getCliente = { cpf: cpfCliente }
+        await axios.put("http://localhost:5000/cliente/consultar", getCliente)
             .then(res => {
+                console.log(res.data);
                 setNome(res.data[0].nome);
-                setDataNascimento(res.data[0].datanascimento);
+                setIdade(res.data[0].idade);
                 setEndereco(res.data[0].endereco);
             })
             .catch(err => {
                 console.log(err)
             })
         const getClienteCpf = { cpf: cpfCliente }
-        axios.put("http://localhost:5000/api/cliente/consultar/aluguel", getClienteCpf)
+        await axios.put("http://localhost:5000/api/cliente/consultar/aluguel", getClienteCpf)
             .then(res => {
                 setJaAlugou(res.data[0].jaAlugou);
             })
             .catch(err => {
                 console.log(err)
             })
-        axios.put("http://localhost:5000/api/cliente/consultar/aluguel/contagem")
+        await axios.put("http://localhost:5000/api/cliente/consultar/aluguel/contagem")
             .then(res => {
                 res.data.forEach((element: { cpf: string; numAlugueis: React.SetStateAction<string>; }) => {
                     if(element.cpf === cpfCliente) {
@@ -48,7 +49,7 @@ const ObterAluguel = ({ }) => {
             .catch(err => {
                 console.log(err)
             })
-            axios.put("http://localhost:5000/api/cliente/consultar/aluguel/historico")
+        await axios.put("http://localhost:5000/api/cliente/consultar/aluguel/historico")
             .then(res => {
                 res.data.forEach((element: { cpf: string; numAlugueis: React.SetStateAction<string>; }) => {
                     if(element.cpf === cpfCliente) {
@@ -95,7 +96,7 @@ const ObterAluguel = ({ }) => {
                     <Grid item xs={10} >
                         <CampoDeTexto label={'Cpf cliente'} setValue={setCpfCliente} />
                         <CampoDeTextoLeitura label={'Nome'} value={nome} />
-                        <CampoDeTextoLeitura label={'Data nascimento'} value={dataNascimento} />
+                        <CampoDeTextoLeitura label={'Idade'} value={idade} />
                         <CampoDeTextoLeitura label={'Endereco'} value={endereco} />
                         <CampoDeTextoLeitura label={'Ja fez alugueis na loja'} value={String(jaAlugou)} />
                         {jaAlugou &&
@@ -106,7 +107,7 @@ const ObterAluguel = ({ }) => {
                         }
                     </Grid>
                     <Grid container direction='column' xs={2} >
-                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={() => (handleClick(cpfCliente))}> Pesquisar aluguel </Button>
+                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={() => (handleClick(cpfCliente))}> Pesquisar cliente </Button>
                     </Grid>
                 </Grid>
             </Grid>

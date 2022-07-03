@@ -55,7 +55,7 @@ const FinalizarLoja = ({ }) => {
                         <CampoDeTexto label={'ID Loja'} setValue={setIdLoja} />
                     </Grid>
                     <Grid container direction='column' xs={2} >
-                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Finalizar aluguel </Button>
+                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Remover loja </Button>
                     </Grid>
                 </Grid>
             </Grid>

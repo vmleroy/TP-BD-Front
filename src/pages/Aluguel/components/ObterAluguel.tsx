@@ -8,20 +8,19 @@ import CampoDeTextoLeitura from '../../../components/TextFields/CampoDeTextoLeit
 
 import IAluguel from '../../../interface/IAluguel';
 
-
 const ObterAluguel = ({  }) => {
+
+    const [alugueis, setAlugueis] = React.useState<IAluguel[]>([]);
 
     React.useEffect(() => {
         axios.get("http://localhost:5000/aluguel")
-            .then(res => {
-                setAlugueis(res.data);
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }, []);
-
-    const [alugueis, setAlugueis] = React.useState<IAluguel[]>([]);
+        .then(res => {
+            setAlugueis(res.data);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    });
 
     const [idAluguel, setIdAluguel] = React.useState<string>('');
     const [cpfVendedor, setCpfVendedor] = React.useState<string>('');

@@ -55,7 +55,7 @@ const FinalizarCarro = ({ }) => {
                         <CampoDeTexto label={'Placa do carro'} setValue={setPlacaCarro} />
                     </Grid>
                     <Grid item container direction='column' xs={2} >
-                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Finalizar aluguel </Button>
+                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Remover carro </Button>
                     </Grid>
                 </Grid>
             </Grid>

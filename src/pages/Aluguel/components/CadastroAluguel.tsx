@@ -17,7 +17,7 @@ const CadastroAluguel = ({ }) => {
     const handleClick = () => {
         const newCadastro={cpfvendedor: parseFloat(cpfVendedor), cpfcliente: parseFloat(cpfCliente), 
             placacarro: placaCarro, valorbase: parseFloat(valorBase)}
-        axios.post("http://localhost:5000/api/alugueis/novo", newCadastro)
+        axios.post("http://localhost:5000/api/aluguel/novo", newCadastro)
             .then(res => {
                 console.log(res.data);
             })

@@ -10,13 +10,14 @@ const CadastroCliente = ({ }) => {
 
     const [nome, setNome] = React.useState<string>('');
     const [cpfCliente, setCpfCliente] = React.useState<string>('');
-    const [dataNascimento, setDataNascimento] = React.useState<string>('');
+    const [idade, setIdade] = React.useState<string>('');
     const [endereco, setEndereco] = React.useState<string>('');
 
 
     const handleClick = () => {
-        const newCliente = { cpfcliente: cpfCliente, nome: nome, 
-            endereco: endereco, datanascimento: dataNascimento }
+        const newCliente = { cpf: cpfCliente, nome: nome, 
+            endereco: endereco, idade: idade }
+        console.log(newCliente);
         axios.post("http://localhost:5000/cliente/cadastro", newCliente)
             .then(res => {
                 console.log(res.data)
@@ -58,7 +59,7 @@ const CadastroCliente = ({ }) => {
                     <Grid item xs={10} >
                         <CampoDeTexto label={'Nome'} setValue={setNome} />
                         <CampoDeTexto label={'Cpf cliente'} setValue={setCpfCliente} />
-                        <CampoDeTexto label={'Data nascimento'} setValue={setDataNascimento} />
+                        <CampoDeTexto label={'Idade'} setValue={setIdade} />
                         <CampoDeTexto label={'Endereco'} setValue={setEndereco} />
                     </Grid>
                     <Grid container direction='column' xs={2} >

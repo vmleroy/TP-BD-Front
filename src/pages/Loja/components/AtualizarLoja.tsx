@@ -13,7 +13,7 @@ const AtualizarLoja = ({ }) => {
 
     const handleClick = () => {
         const updtLoja = { idestabelecimento: idLoja, endereco: endereco};
-        axios.put(`http://localhost:5000/estabelecimento/consultar`, updtLoja)
+        axios.put(`http://localhost:5000/estabelecimento/atualizar`, updtLoja)
             .then(res => {
                 console.log(res.data);
             })

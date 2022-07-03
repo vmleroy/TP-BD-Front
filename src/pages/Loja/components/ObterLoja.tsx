@@ -82,7 +82,7 @@ const ObterLoja = ({ }) => {
                         </FormControl>
                     </Grid>
                     <Grid container direction='column' xs={2} >
-                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Pesquisar aluguel </Button>
+                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Pesquisar loja </Button>
                     </Grid>
                 </Grid>
             </Grid>

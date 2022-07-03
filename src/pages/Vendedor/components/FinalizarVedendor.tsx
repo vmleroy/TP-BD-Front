@@ -13,7 +13,7 @@ const FinalizarVedendor = ({ }) => {
 
     const handleClick = () => {
         const remvVendedor = {cpf: cpfVedendor}
-        axios.post('http://localhost:5000/vendedor/remover', remvVendedor)
+        axios.put('http://localhost:5000/vendedor/remover', remvVendedor)
             .then(res => {
                 console.log(res.data);
             })
@@ -55,7 +55,7 @@ const FinalizarVedendor = ({ }) => {
                         <CampoDeTexto label={'Cpf'} setValue={setCpfVedendor} />
                     </Grid>
                     <Grid container direction='column' xs={2} >
-                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Finalizar aluguel </Button>
+                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={handleClick}> Remover vendedor </Button>
                     </Grid>
                 </Grid>
             </Grid>

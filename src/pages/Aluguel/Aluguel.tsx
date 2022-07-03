@@ -13,17 +13,17 @@ import IAluguel from '../../interface/IAluguel';
 
 const Aluguel = ({ }) => {
 
-    React.useEffect(() => {
-        axios.get("http://localhost:5000/aluguel")
-            .then(res => {
-                setAlugueis(res.data);
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }, []);
+    // React.useEffect(() => {
+    //     axios.get("http://localhost:5000/aluguel")
+    //         .then(res => {
+    //             setAlugueis(res.data);
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //         });
+    // });
 
-    const [alugueis, setAlugueis] = React.useState<IAluguel[]>([]);
+    // const [alugueis, setAlugueis] = React.useState<IAluguel[]>([]);
 
     return (
         <>
@@ -39,7 +39,7 @@ const Aluguel = ({ }) => {
             >
                 <NavBar turnButtonsOn={true} name={'Aluguel'} />
                 <CadastroAluguel />
-                <FinalizarAluguel aluguelProps={alugueis} />
+                <FinalizarAluguel />
                 <ObterAluguel />
             </Grid>
         </>

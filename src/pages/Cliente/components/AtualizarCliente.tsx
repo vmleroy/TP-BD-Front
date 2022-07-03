@@ -13,7 +13,7 @@ const AtualizarCliente = ({ }) => {
     const [endereco, setEndereco] = React.useState<string>('');
 
     const handleClick = () => {
-        const updtCliente = { cpfcliente: cpfCliente, nome: nome, endereco: endereco }
+        const updtCliente = { cpf: cpfCliente, nome: nome, endereco: endereco }
         axios.put("http://localhost:5000/cliente/atualizar", updtCliente)
             .then(res => {
                 console.log(res.data)

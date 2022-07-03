@@ -97,7 +97,7 @@ const ObterCarro = ({ }) => {
                         </FormControl>
                     </Grid>
                     <Grid item container direction='column' xs={2} >
-                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={() => (handleClick(placa))}> Pesquisar aluguel </Button>
+                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={() => (handleClick(placa))}> Pesquisar Carros </Button>
                     </Grid>
                 </Grid>
             </Grid>

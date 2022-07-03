@@ -12,7 +12,7 @@ const FinalizarCliente = ({ }) => {
     const [cpfCliente, setCpfCliente] = React.useState<string>('');
 
     const handleClick = (cpfCliente: string) => {
-        const endCliente = { cpfcliente: cpfCliente }
+        const endCliente = { cpf: cpfCliente }
         axios.put("http://localhost:5000/cliente/remover", endCliente)
             .then(res => {
                 console.log(res.data)
@@ -55,7 +55,7 @@ const FinalizarCliente = ({ }) => {
                         <CampoDeTexto label={'Cpf cliente'} setValue={setCpfCliente} />
                     </Grid>
                     <Grid container direction='column' xs={2} >
-                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={() => (handleClick(cpfCliente))}> Finalizar aluguel </Button>
+                        <Button variant='outlined' sx={{ mx: "0.5rem", my: "0.5rem", backgroundColor: "white" }} onClick={() => (handleClick(cpfCliente))}> Remover cliente </Button>
                     </Grid>
                 </Grid>
             </Grid>

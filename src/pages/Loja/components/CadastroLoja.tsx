@@ -8,12 +8,11 @@ import CampoDeTexto from '../../../components/TextFields/CampoDeTexto';
 
 const CadastroLoja = ({ }) => {
 
-    const [nome, setNome] = React.useState<string>('');
     const [endereco, setEndereco] = React.useState<string>('');
 
     const handleClick = () => {
-        const newLoja = { nome: nome, endereco: endereco};
-        axios.put(`http://localhost:5000/estabelecimento/cadastro`, newLoja)
+        const newLoja = { endereco: endereco};
+        axios.post(`http://localhost:5000/estabelecimento/cadastro`, newLoja)
             .then(res => {
                 console.log(res.data);
             })
@@ -52,7 +51,7 @@ const CadastroLoja = ({ }) => {
                     sx={{ minHeight: "20vh", border: 2, borderColor: "#120458" }}
                 >
                     <Grid item xs={10} >
-                        <CampoDeTexto label={'Nome'} setValue={setNome} />
+                        {/* <CampoDeTexto label={'Nome'} setValue={setNome} /> */}
                         <CampoDeTexto label={'Endereco'} setValue={setEndereco} />
                     </Grid>
                     <Grid container direction='column' xs={2} >

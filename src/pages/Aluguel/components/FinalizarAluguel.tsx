@@ -6,11 +6,19 @@ import { Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEv
 
 import IAluguel from '../../../interface/IAluguel';
 
-interface Props {
-    aluguelProps: IAluguel[];
-}
+const FinalizarAluguel = ({  }) => {
 
-const FinalizarAluguel: React.FC<Props> = ({ aluguelProps }) => {
+    const [alugueis, setAlugueis] = React.useState<IAluguel[]>([]);
+
+    React.useEffect(() => {
+        axios.get("http://localhost:5000/aluguel")
+            .then(res => {
+                setAlugueis(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    });
 
     const [idAluguel, setIdAluguel] = React.useState<string>('');
 
@@ -20,7 +28,7 @@ const FinalizarAluguel: React.FC<Props> = ({ aluguelProps }) => {
     };
 
     const handleClick = (idAluguel: string) => {
-        axios.put(`http://localhost:5000/api/alugueis/${idAluguel}/encerrar`)
+        axios.put(`http://localhost:5000/api/aluguel/${idAluguel}/encerrar`)
             .then(res => {
                 console.log(res.data);
             })
@@ -67,7 +75,7 @@ const FinalizarAluguel: React.FC<Props> = ({ aluguelProps }) => {
                                 value={idAluguel}
                                 onChange={handleSelectChange}
                             >
-                                {aluguelProps?.map((item: IAluguel) => {
+                                {alugueis?.map((item: IAluguel) => {
                                     return <MenuItem key={item.idaluguel} value={item.idaluguel}> ID:{item.idaluguel} - Cliente:{item.cpfcliente} - Placa carro:{item.placacarro} </MenuItem>
                                 })}
                             </Select>
